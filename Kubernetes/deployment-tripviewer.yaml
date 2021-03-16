@@ -1,25 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: azure-vote-back
+  name: userprofile
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: azure-vote-back
+      app: userprofile
   template:
     metadata:
       labels:
-        app: azure-vote-back
+        app: userprofile
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: azure-vote-back
-        image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+      - name: userprofile
+        image: registrydgr7315.azurecr.io/tripinsights/userprofile:1.0
         env:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
+        - name: SQL_USER
+          value: "sqladmindGr7315"
+        - name: SQL_PASSWORD
+          value: "fW0ou6Jh6"
+        - name: SQL_SERVER
+          value: "sqlserverdgr7315.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
         resources:
           requests:
             cpu: 100m
@@ -28,18 +36,18 @@ spec:
             cpu: 250m
             memory: 256Mi
         ports:
-        - containerPort: 6379
-          name: redis
+        - containerPort: 80
+          name: userprofile
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: azure-vote-back
+  name: userprofile
 spec:
   ports:
-  - port: 6379
+  - port: 80
   selector:
-    app: azure-vote-back
+    app: userprofile
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -76,10 +84,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: azure-vote-front
+  name: tripviewer
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: azure-vote-front
+    app: tripviewer
