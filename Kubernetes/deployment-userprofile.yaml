@@ -19,9 +19,9 @@ spec:
         image: registrydgr7315.azurecr.io/tripinsights/userprofile:1.0
         env:
         - name: SQL_USER
-          value: "sqladmindGr7315"
+          value: "sqladmgjhgjhgjhgindGr7315"
         - name: SQL_PASSWORD
-          value: "fW0ou6Jh6"
+          value: "fW0ou6gyjgjygjygjJh6"
         - name: SQL_SERVER
           value: "sqlserverdgr7315.database.windows.net"
         - name: SQL_DBNAME
